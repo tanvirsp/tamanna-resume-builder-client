@@ -1,0 +1,94 @@
+.resume-container {
+  max-width: 1000px;
+  margin:35px  auto;
+  padding: 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background-color: white;
+ 
+  
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 10px;
+}
+
+.profile-pic {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+}
+
+.name-title h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+.job-title {
+  margin: 5px 0 0;
+  color: #357edd;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.content {
+  display: flex;
+  gap: 30px;
+}
+
+.left-column, .right-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.left-column section,
+.right-column section {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+h2 {
+  margin-top: 0;
+  color: #1a1a1a;
+  font-size: 1.3rem;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.entry {
+  margin-bottom: 15px;
+}
+
+.duration {
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+  }
+  .header {
+    flex-direction: column;
+    text-align: center;
+  }
+  .profile-pic {
+    margin-bottom: 10px;
+  }
+}

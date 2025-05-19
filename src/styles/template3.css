@@ -1,0 +1,146 @@
+.template3 {
+    max-width: 900px;
+    margin: 30px auto;
+    background-color: white;
+    padding: 35px
+   
+}
+
+.template3 h5 {
+    font-size: 16px;
+}
+
+.template3 p {
+    font-size: 14px;
+    line-height: 20px; 
+}
+
+.template3-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+}
+
+
+.top-section-left {
+    background-color: #f7f7f7 ;
+}
+
+
+.profile3 {
+    width: 100%;
+
+}
+
+.contact3 {
+    
+    padding: 35px;
+    margin-top: -10px
+}
+
+.section-title-3 {
+    font-size: 22px;
+    margin-bottom: 5px
+}
+
+.contact3 p {
+    font-size: 14px;
+    margin-bottom: 7px
+}
+
+.lineOne3 {
+    height: 1px;
+    width: 200px;
+    background-color: rgb(131, 129, 129);
+   
+}
+
+.lineTwo3 {
+    height: 4px;
+    width: 20px;
+    background-color: rgb(50, 50, 50);
+    margin-top: 20px;
+}
+
+
+.lineFull3 {
+    height: 1px;
+    width: 67%;
+    background-color: rgb(131, 129, 129);
+   
+}
+
+
+.t-name-3 {
+    text-align: end;
+    font-size: 45px;
+    text-transform: uppercase;
+    font-weight: 300;
+    margin-top: 65px
+}
+
+.top-section-right {
+    padding: 35px
+}
+
+
+.bottom-section-left {
+    text-align: end;
+    padding-top: 45px;
+    padding-left: 30px
+    
+}
+
+
+.skill-section-3 {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+
+}
+
+
+.skill-title-3 {
+     font-size: 22px;  
+     
+}
+
+.box3-One {
+    background-color: blue;
+    height: 40px;
+    width: 100px;
+}
+
+
+.t-3-language {
+    text-align: end;
+    margin-right: 70px;
+    list-style-type: none;
+}
+
+.t-3-language li {
+    padding: 3px 0
+}
+
+.t-3-language li::after{
+    content: "";
+    width: 5px;
+    height: 5px;
+    background-color: black;
+    display: inline-block;
+    margin-bottom: 3px;
+    margin-left: 10px
+}
+
+
+.bottom-section-right {
+    background-color: #f7f7f7;
+    padding: 35px;
+}
+
+
+.t-3-other {
+   text-align: start;
+   margin-left: 30px;
+   margin-top: 10px;
+}
