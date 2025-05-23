@@ -31,9 +31,11 @@ export default function Template2() {
 
     const nagivate = useNavigate()
 
+
+
 const handleDownload = async () => {
   try {
-    const resumeContainer = document.querySelector(".print-area");
+    const resumeContainer = document.querySelector(".resume-container");
     const img = resumeContainer.querySelector(".imgBB");
 
     if (resumeContainer && img && img.src) {
@@ -119,7 +121,9 @@ const handleDownload = async () => {
             {/* Heading */}
            
             <h1 className="user-name">
-              <div><img className='imgBB' style={{borderRadius: "100%"}}  width="130px" src={profile?.picture} alt="Profile picture" /></div>
+              <div>
+                <img className='imgBB' style={{borderRadius: "100%"}}  width="130px" src={profile?.picture} alt="Profile picture" />
+              </div>
               {profile.firstName} {profile.lastName}
             </h1>
             <div className="user-details">
