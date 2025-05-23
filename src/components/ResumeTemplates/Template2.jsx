@@ -31,39 +31,52 @@ export default function Template2() {
 
     const nagivate = useNavigate()
 
-  const handleDownload = () => {
-    try {
-      const resumeContainer = document.querySelector(".resume-container");
+const handleDownload = async () => {
+  try {
+    const resumeContainer = document.querySelector(".print-area");
+    const img = resumeContainer.querySelector(".imgBB");
 
-      if (resumeContainer) {
-        setLoading(true);
-        const opt = {
-          margin: 0.1,
-          filename: 'user-resume.pdf',
-          image: { type: 'jpeg', quality: 1.00 },
-          html2canvas: { scale: 4 },
-          jsPDF: { unit: 'in', format: 'A4', orientation: 'portrait' },
-          pagebreak: { mode: ['avoid-all', 'css', 'legacy'] } // Ensure proper page breaks
-        };
+    if (resumeContainer && img && img.src) {
+      setLoading(true);
 
-        html2pdf().set(opt).from(resumeContainer).save().then(() => {
-          setLoading(false); // End loading state after PDF is generated
-          setCongratsVisible(true); // Trigger Confetti effect
+      // Convert image to Base64 and update src
+      const base64Image = await getBase64ImageFromURL(img.src);
+      img.setAttribute("src", base64Image);
 
-          // Reset confetti after 5 seconds
-          setTimeout(() => {
-            setCongratsVisible(false);
-          }, 5000);
-        });
-      } else {
-        console.error("Resume container not found.");
+      const opt = {
+        margin: 0.1,
+        filename: 'user-resume.pdf',
+        image: { type: 'jpeg', quality: 1.00 },
+        html2canvas: { scale: 4 },
+        jsPDF: { unit: 'in', format: 'A4', orientation: 'portrait' },
+      };
+
+      html2pdf().set(opt).from(resumeContainer).save().then(() => {
         setLoading(false);
-      }
-    } catch (error) {
-      console.error("Error generating PDF:", error);
+        setCongratsVisible(true);
+        setTimeout(() => setCongratsVisible(false), 5000);
+      });
+    } else {
+      console.error("Print Area or image not found.");
       setLoading(false);
     }
-  };
+  } catch (error) {
+    console.error("Error generating PDF:", error);
+    setLoading(false);
+  }
+};
+
+
+  const getBase64ImageFromURL = async (url) => {
+  const res = await fetch(url, { mode: 'cors' });
+  const blob = await res.blob();
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = reject;
+    reader.onload = () => resolve(reader.result);
+    reader.readAsDataURL(blob);
+  });
+};
 
 
   const customStyle = {
@@ -81,13 +94,6 @@ export default function Template2() {
     // alignItems: "center",
   };
 
-  const returnLinks = {
-    profile: "/profile",
-    education: "/education",
-    projects: "/projects",
-    experience: "/experience",
-    extraDetails: "/extraDetails",
-  }
 
 
   return (
@@ -111,7 +117,9 @@ export default function Template2() {
         <Paper className="resume-container" elevation={2} style={customStyle}>
           <Box sx={{ flexShrink: 4 }}>
             {/* Heading */}
+           
             <h1 className="user-name">
+              <div><img className='imgBB' style={{borderRadius: "100%"}}  width="130px" src={profile?.picture} alt="Profile picture" /></div>
               {profile.firstName} {profile.lastName}
             </h1>
             <div className="user-details">

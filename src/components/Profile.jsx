@@ -1,6 +1,5 @@
-import React from "react";
 import {
-  Card,
+ 
   CardContent,
   CardHeader,
   Grid,
@@ -21,6 +20,8 @@ import { updateProfile } from "../redux/profileSlice";
 import { Link } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import getProfession from "../utility/getProfession";
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -45,19 +46,19 @@ const Profile = () => {
 
   return (
     <div style={containerStyle}>
-      <Card>
+      <div style={{marginTop: "20px"}}>
         <CardHeader
           title={
-            <Typography variant="h5" align="center" fontWeight="bold">
+            <Typography variant="h4" align="center" fontWeight="bold">
               Personal Details
             </Typography>
           }
         />
-      </Card>
+      </div>
       <CardContent>
         <div>
           <Grid container spacing={2} alignItems="center" lg={12}>
-            <Grid item md={6} sm={12} xs={12} lg={6}>
+            <Grid item md={4} sm={12} xs={12} lg={4}>
               <TextField
                 margin="dense"
                 variant="outlined"
@@ -79,7 +80,7 @@ const Profile = () => {
                 }}
               />
             </Grid>
-            <Grid item md={6} sm={12} xs={12} lg={6}>
+            <Grid item md={4} sm={12} xs={12} lg={4}>
               <TextField
                 margin="dense"
                 variant="outlined"
@@ -95,6 +96,28 @@ const Profile = () => {
                     <InputAdornment position="end">
                       <IconButton>
                         <PersonIcon />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+            <Grid item md={4} sm={12} xs={12} lg={4}>
+              <TextField
+                margin="dense"
+                variant="outlined"
+                type="text"
+                name="picture"
+                label="Picture URL"
+                style={{ width: "100%" }}
+                required
+                value={currentProfile?.picture}
+                onChange={handleChange}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton>
+                        <AddAPhotoIcon />
                       </IconButton>
                     </InputAdornment>
                   ),
@@ -199,54 +222,55 @@ const Profile = () => {
                 }}
               />
             </Grid>
+             
           </Grid>
-
+         
           
           {
             professionID ==="2" && <div>
                 <Grid container spacing={2} alignItems="center" lg={12}>
-              <Grid item md={6} sm={12} xs={12} lg={6}>
-                <TextField
-                  margin="dense"
-                  variant="outlined"
-                  type="text"
-                  name="linkedIn"
-                  label="Linked In"
-                  style={{ width: "100%" }}
-                  value={currentProfile?.linkedIn}
-                  onChange={handleChange}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton>
-                          <LinkedInIcon />
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Grid>
-              <Grid item md={6} sm={12} xs={12} lg={6}>
-                <TextField
-                  margin="dense"
-                  variant="outlined"
-                  type="text"
-                  name="github"
-                  label="Github"
-                  style={{ width: "100%" }}
-                  value={currentProfile?.github}
-                  onChange={handleChange}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton>
-                          <GitHubIcon />
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Grid>
+                  <Grid item md={6} sm={12} xs={12} lg={6}>
+                    <TextField
+                      margin="dense"
+                      variant="outlined"
+                      type="text"
+                      name="linkedIn"
+                      label="Linked In"
+                      style={{ width: "100%" }}
+                      value={currentProfile?.linkedIn}
+                      onChange={handleChange}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton>
+                              <LinkedInIcon />
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  </Grid>
+                  <Grid item md={6} sm={12} xs={12} lg={6}>
+                    <TextField
+                      margin="dense"
+                      variant="outlined"
+                      type="text"
+                      name="github"
+                      label="Github"
+                      style={{ width: "100%" }}
+                      value={currentProfile?.github}
+                      onChange={handleChange}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton>
+                              <GitHubIcon />
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  </Grid>
                 </Grid>
                 <Grid container spacing={2} alignItems="center" lg={12}>
                   <Grid item md={6} sm={12} xs={12} lg={6}>
@@ -324,12 +348,26 @@ const Profile = () => {
 
       <Grid container spacing={2} alignItems="center" lg={12} >
         <Grid item md={12} sm={12} xs={12} lg={12} style={containerStyles}>
+          <Link to={'/category'} style={linkStyle}>
+            <ArrowBackIcon style={iconStyle} />
+            <h4>Category</h4>
+          </Link>
+          
           <Link to={'/education'} style={linkStyle}>
             <h4>Education Section</h4>
             <ArrowForwardIcon style={iconStyle} />
           </Link>
         </Grid>
       </Grid>
+
+      
+
+      
+
+
+
+
+
     </div>
   );
 };
@@ -349,12 +387,15 @@ const linkStyle = {
 const containerStyles = {
   marginBottom: '20px',
   display: 'flex',
-  justifyContent: 'end',
+  justifyContent: 'space-between',
   alignItems: 'center',
   // backgroundColor: 'crimson',
   marginTop: '20px',
   paddingRight: '40px',
+  paddingLeft: '40px',
 };
+
+
 const iconStyle = {
   verticalAlign: 'middle', // Align icon vertically with text
   marginLeft: '5px', // Add margin between icon and text

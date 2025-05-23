@@ -28,77 +28,77 @@ const CategoryPage = () => {
         <h3 style={{textAlign:"center", fontSize:"36px", fontWeight: "400", marginBottom: "20px", padding: "20px"}}>Choose A Profession</h3>
     
       <Grid container spacing={2}>
-      <Grid item xs={6}>
-         <Paper elevation={3}  sx={{
-            p: 2,
-            textAlign: 'center',
-            padding: '40px',
-            transition: '0.3s',
-            cursor: 'pointer',
-            '&:hover': {
-              backgroundColor: '#EBCA37',
-            },
-          }}>
-          <Typography variant="h6" onClick={()=>handleCategoryID('1')}>Doctor</Typography>
-        </Paper>
-      </Grid>
-      <Grid item xs={6}>
+        <Grid item  xs={12} sm={6} md={6} lg={6} xl={6}>
+          <Paper elevation={3}  sx={{
+              p: 2,
+              textAlign: 'center',
+              padding: '30px',
+              transition: '0.3s',
+              cursor: 'pointer',
+              '&:hover': {
+                backgroundColor: '#EBCA37',
+              },
+            }}>
+            <Typography variant="h6" onClick={()=>handleCategoryID('1')}>Doctor</Typography>
+          </Paper>
+        </Grid>
+        <Grid item  xs={12} sm={6} md={6} lg={6} xl={6}>
+          <Paper elevation={3}  sx={{
+              p: 2,
+              textAlign: 'center',
+              transition: '0.3s',
+              padding: '30px',
+              cursor: 'pointer',
+              '&:hover': {
+                backgroundColor: '#EBCA37',
+              },
+            }}>
+            <Typography variant="h6" onClick={()=>handleCategoryID('2')}>IT Expert</Typography>
+          </Paper>
+        </Grid>
+        <Grid item  xs={12} sm={6} md={6} lg={6} xl={6}>
+          <Paper elevation={3}  sx={{
+              p: 2,
+              textAlign: 'center',
+              padding: '30px',
+              transition: '0.3s',
+              cursor: 'pointer',
+              '&:hover': {
+                backgroundColor: '#EBCA37',
+              },
+            }}>
+            <Typography variant="h6" onClick={()=>handleCategoryID('3')}>Teacher</Typography>
+          </Paper>
+        </Grid>
+        <Grid item  xs={12} sm={6} md={6} lg={6} xl={6}>
         <Paper elevation={3}  sx={{
-            p: 2,
-            textAlign: 'center',
-            transition: '0.3s',
-            padding: '40px',
-            cursor: 'pointer',
-            '&:hover': {
-              backgroundColor: '#EBCA37',
-            },
-          }}>
-          <Typography variant="h6" onClick={()=>handleCategoryID('2')}>IT Expert</Typography>
-        </Paper>
+              p: 2,
+              textAlign: 'center',
+              padding: '30px',
+              transition: '0.3s',
+              cursor: 'pointer',
+              '&:hover': {
+                backgroundColor: '#EBCA37',
+              },
+            }}>
+            <Typography variant="h6" onClick={()=>handleCategoryID('4')}>Freelancer</Typography>
+          </Paper>
+        </Grid>
+        <Grid item xs={12}>
+          <Paper elevation={3}  sx={{
+              p: 2,
+              textAlign: 'center',
+              transition: '0.3s',
+              padding: '30px',
+              cursor: 'pointer',
+              '&:hover': {
+                backgroundColor: '#EBCA37',
+              },
+            }}>
+            <Typography variant="h6" onClick={()=>handleCategoryID('5')}>Others</Typography>
+          </Paper>
+        </Grid>
       </Grid>
-      <Grid item xs={6}>
-         <Paper elevation={3}  sx={{
-            p: 2,
-            textAlign: 'center',
-            padding: '40px',
-            transition: '0.3s',
-            cursor: 'pointer',
-            '&:hover': {
-              backgroundColor: '#EBCA37',
-            },
-          }}>
-          <Typography variant="h6" onClick={()=>handleCategoryID('3')}>Teacher</Typography>
-        </Paper>
-      </Grid>
-      <Grid item xs={6}>
-       <Paper elevation={3}  sx={{
-            p: 2,
-            textAlign: 'center',
-            padding: '40px',
-            transition: '0.3s',
-            cursor: 'pointer',
-            '&:hover': {
-              backgroundColor: '#EBCA37',
-            },
-          }}>
-          <Typography variant="h6" onClick={()=>handleCategoryID('4')}>Freelancer</Typography>
-        </Paper>
-      </Grid>
-      <Grid item xs={12}>
-        <Paper elevation={3}  sx={{
-            p: 2,
-            textAlign: 'center',
-            transition: '0.3s',
-            padding: '40px',
-            cursor: 'pointer',
-            '&:hover': {
-              backgroundColor: '#EBCA37',
-            },
-          }}>
-          <Typography variant="h6" onClick={()=>handleCategoryID('5')}>Others</Typography>
-        </Paper>
-      </Grid>
-    </Grid>
    
     </section>
     

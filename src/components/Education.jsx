@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import {
   Box,
-  Card,
   CardContent,
   CardHeader,
   Grid,
   IconButton,
   InputAdornment,
   MenuItem,
-  Paper,
+ 
   TextField,
   Typography,
 } from "@mui/material";
@@ -29,14 +28,20 @@ const Education = () => {
   const dispatch = useDispatch();
   const education = useSelector((state) => state.educationDetails);
 
+
   // const handleChange = (event) => {
   //   const { name, value } = event.target;
-  //   dispatch(updateEducation({ [name]: value }));
+  //   dispatch(updateEducation({ ...education, [name]: value }));
   // };
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    dispatch(updateEducation({ ...education, [name]: value }));
-  };
+
+
+const handleChange = (event) => {
+  const { name, value } = event.target;
+  const newValue = value === "__clear__" ? "" : value;
+  dispatch(updateEducation({ ...education, [name]: newValue }));
+};
+
+
 
 
   const containerStyle = {
@@ -62,14 +67,93 @@ const Education = () => {
   ];
 
 const medicalFields = [
-    "Neurosurgery",
-    "Cardiology",
-    "Dermatology",
-    "Gastroenterology",
-    "Radiology",
-    "Hematology",
-    "Plastic Surgery",
+     "Anatomy",
+  "Physiology",
+  "Pathology",
+  "Pharmacology",
+  "Microbiology",
+  "Biochemistry",
+  "Immunology",
+  "Genetics",
+  "Histology",
+  "Neurology",
+  "Cardiology",
+  "Oncology",
+  "Dermatology",
+  "Endocrinology",
+  "Gastroenterology",
+  "Hematology",
+  "Nephrology",
+  "Pulmonology",
+  "Rheumatology",
+  "Psychiatry",
+  "Pediatrics",
+  "Obstetrics and Gynecology",
+  "Surgery",
+  "Orthopedics",
+  "Ophthalmology",
+  "Otolaryngology (ENT)",
+  "Radiology",
+  "Anesthesiology",
+  "Emergency Medicine",
+  "Family Medicine",
+  "Internal Medicine",
+  "Public Health",
+  "Forensic Medicine",
+  "Sports Medicine",
+  "Geriatrics",
+  "Urology",
+  "Nuclear Medicine",
+  "Medical Genetics",
+  "Infectious Diseases",
+  "Toxicology"
   ];
+
+
+  const medicalBranches = [
+  "Allergy and Immunology",
+  "Anesthesiology",
+  "Dermatology",
+  "Diagnostic Radiology",
+  "Emergency Medicine",
+  "Family Medicine",
+  "Internal Medicine",
+  "Medical Genetics",
+  "Neurology",
+  "Nuclear Medicine",
+  "Obstetrics and Gynecology",
+  "Ophthalmology",
+  "Pathology",
+  "Pediatrics",
+  "Physical Medicine and Rehabilitation",
+  "Preventive Medicine",
+  "Psychiatry",
+  "Radiology",
+  "Surgery",
+  "Urology",
+  "Orthopedic Surgery",
+  "Cardiology",
+  "Endocrinology",
+  "Gastroenterology",
+  "Hematology",
+  "Infectious Disease",
+  "Nephrology",
+  "Oncology",
+  "Pulmonology",
+  "Rheumatology",
+  "Geriatrics",
+  "Sports Medicine",
+  "Palliative Care",
+  "Otolaryngology (ENT)",
+  "Plastic Surgery",
+  "Neurosurgery",
+  "Vascular Surgery",
+  "Thoracic Surgery",
+  "Critical Care Medicine",
+  "Occupational Medicine",
+  "Forensic Medicine",
+  "Reproductive Endocrinology"
+];
 
   const otherFields = ["B.E.", "B.Tech", "BCA", "Bsc", "MBA", "M.Tech"];
 
@@ -116,7 +200,7 @@ const medicalFields = [
             </div>
             {/* Row 1 */}
             <Grid container spacing={1} alignItems="center" lg={12} mb={2}>
-              <Grid item md={4} sm={12} xs={12} lg={4}>
+              <Grid item md={8} sm={12} xs={12} lg={8}>
                 <TextField
                   margin="dense"
                   variant="outlined"
@@ -134,41 +218,11 @@ const medicalFields = [
                       </InputAdornment>
                     ),
                   }}
-                  value={education.college}
+                  value={education?.college}
                   onChange={handleChange}
                 />
               </Grid>
-               <Grid item md={4} sm={12} xs={12} lg={4}>
-                <TextField
-                  select
-                  margin="dense"
-                  variant="outlined"
-                  name="year"
-                  label="Year"
-                  style={{ width: "100%" }}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton>
-                          <EventIcon />
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                  value={education.startYear}
-                  onChange={handleChange}
-                >
-                  <MenuItem value="" disabled>
-                    Select Year
-                  </MenuItem>
-                  {years.map((year) => (
-                    <MenuItem key={year} value={year}>
-                      {year}
-                    </MenuItem>
-                  ))}
-                  <MenuItem value="">Clear Selection</MenuItem>
-                </TextField>
-              </Grid>
+              
               <Grid item md={4} sm={12} xs={12} lg={4}>
                 <TextField
                   select
@@ -178,13 +232,13 @@ const medicalFields = [
                   label="Field of Study"
                   style={{ width: "100%" }}
                   required
-                  value={education.field}
+                  value={education?.field}
                   onChange={handleChange}
                 >
                   <MenuItem value="" disabled>
                     Select Field
                   </MenuItem>
-                  {otherFields.map((field) => (
+                  {medicalFields?.map((field) => (
                     <MenuItem key={field} value={field}>
                       {field}
                     </MenuItem>
@@ -200,17 +254,17 @@ const medicalFields = [
                   select
                   margin="dense"
                   variant="outlined"
-                  name="medicalBranch"
+                  name="branch"
                   label="Select Branch"
                   style={{ width: "100%" }}
                   required
-                  value={education.medicalBranch || ""}
+                  value={education.branch || ""}
                   onChange={handleChange}
                 >
                   <MenuItem value="" disabled>
                     Select Branch
                   </MenuItem>
-                  {medicalFields.map((field) => (
+                  {medicalBranches?.map((field) => (
                     <MenuItem key={field} value={field}>
                       {field}
                     </MenuItem>
@@ -328,211 +382,226 @@ const medicalFields = [
 
             </div> :
             <div>
-               {/* College Details */}
-          <Grid container spacing={1} alignItems="center" lg={12} >
-            <div>
-              <Typography variant="h6" align="left">
-                College/University Details
-              </Typography>
-            </div>
-            {/* Row 1 */}
-            <Grid container spacing={1} alignItems="center" lg={12} mb={2}>
-              <Grid item md={4} sm={12} xs={12} lg={4}>
-                <TextField
-                  margin="dense"
-                  variant="outlined"
-                  type="text"
-                  name="college"
-                  label="College Name"
-                  style={{ width: "100%" }}
-                  required
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton>
-                          <SchoolIcon />
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                  value={education.college}
-                  onChange={handleChange}
-                />
+          {/* College Details */}
+              <Grid container spacing={1} alignItems="center" lg={12} >
+                <div>
+                  <Typography variant="h6" align="left">
+                    College/University Details
+                  </Typography>
+                </div>
+                {/* Row 1 */}
+                <Grid container spacing={1} alignItems="center" lg={12} mb={2}>
+                  <Grid item md={4} sm={12} xs={12} lg={4}>
+                    <TextField
+                      margin="dense"
+                      variant="outlined"
+                      type="text"
+                      name="college"
+                      label="College Name"
+                      style={{ width: "100%" }}
+                      required
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton>
+                              <SchoolIcon />
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
+                      value={education.college}
+                      onChange={handleChange}
+                    />
+                  </Grid>
+                   <Grid item md={4} sm={12} xs={12} lg={4}>
+                    <TextField
+                      select
+                      margin="dense"
+                      variant="outlined"
+                      name="year"
+                      label="Year"
+                      style={{ width: "100%" }}
+                      value={education.year}
+                      onChange={handleChange}
+                    >
+                      {years.map((year) => (
+                        <MenuItem key={year} value={year}>
+                          {year}
+                        </MenuItem>
+                      ))}
+                      <MenuItem value="__clear__">Clear Selection</MenuItem>
+                    </TextField>
+                  </Grid>
+                  <Grid item md={4} sm={12} xs={12} lg={4}>
+                    <TextField
+                      select
+                      margin="dense"
+                      variant="outlined"
+                      name="field"
+                      label="Field of Study"
+                      style={{ width: "100%" }}
+                      required
+                      value={education.field}
+                      onChange={handleChange}
+                    >
+                      <MenuItem value="" disabled>
+                        Select Field
+                      </MenuItem>
+                      {otherFields.map((field) => (
+                        <MenuItem key={field} value={field}>
+                          {field}
+                        </MenuItem>
+                      ))}
+                       <MenuItem value="__clear__">Clear Selection</MenuItem>
+                    </TextField>
+                  </Grid>
+
+
+
+                </Grid>
+
+
+                {/* Row 2 */}
+                <Grid container spacing={1} alignItems="center" lg={12} mb={2}>
+                  <Grid item md={4} sm={12} xs={12} lg={4}>
+                    <TextField
+                      select
+                      margin="dense"
+                      variant="outlined"
+                      name="branch"
+                      label="Select Branch"
+                      style={{ width: "100%" }}
+                      required
+                      value={education.branch}
+                      onChange={handleChange}
+                    >
+                      <MenuItem value="" disabled>
+                        Select Branch
+                      </MenuItem>
+                      {engineeringFields.map((field) => (
+                        <MenuItem key={field} value={field}>
+                          {field}
+                        </MenuItem>
+                      ))}
+                      <MenuItem value="__clear__">Clear Selection</MenuItem>
+                    </TextField>
+                  </Grid>
+                  <Grid item md={4} sm={12} xs={12} lg={4}>
+                    <TextField
+                      select
+                      margin="dense"
+                      variant="outlined"
+                      name="startYear"
+                      label="Start Year"
+                      style={{ width: "100%" }}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton>
+                              <EventIcon />
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
+                      value={education.startYear}
+                      onChange={handleChange}
+                    >
+                      <MenuItem value="" disabled>
+                        Select Year
+                      </MenuItem>
+                      {years.map((year) => (
+                        <MenuItem key={year} value={year}>
+                          {year}
+                        </MenuItem>
+                      ))}
+                      <MenuItem value="__clear__">Clear Selection</MenuItem>
+                    </TextField>
+                  </Grid>
+                  <Grid item md={4} sm={12} xs={12} lg={4}>
+                    <TextField
+                      select
+                      margin="dense"
+                      variant="outlined"
+                      name="endYear"
+                      label="End Year"
+                      style={{ width: "100%" }}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton>
+                              <EventIcon />
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
+                      value={education.endYear}
+                      onChange={handleChange}
+                    >
+                      <MenuItem value="" disabled>
+                        Select Year
+                      </MenuItem>
+                      {years.map((year) => (
+                        <MenuItem key={year} value={year}>
+                          {year}
+                        </MenuItem>
+                      ))}
+                      <MenuItem value="__clear__">Clear Selection</MenuItem>
+                    </TextField>
+                  </Grid>
+                </Grid>
+                {/* Row 3 */}
+                <Grid container spacing={1} alignItems="center" lg={12} mb={2}>
+                  <Grid item md={6} sm={12} xs={12} lg={6}>
+                    <TextField
+                      margin="dense"
+                      variant="outlined"
+                      name="city"
+                      label="City"
+                      style={{ width: "100%" }}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton>
+                              <LocationCityIcon />
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
+                      value={education.city}
+                      onChange={handleChange}
+                    />
+                  </Grid>
+                  <Grid item md={6} sm={12} xs={12} lg={6}>
+                    <TextField
+                      margin="dense"
+                      variant="outlined"
+                      name="grades"
+                      label="CGPA"
+                      style={{ width: "100%" }}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton>
+                              <GradeIcon />
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
+                      value={education.grades}
+                      onChange={handleChange}
+                    />
+                  </Grid>
+                </Grid>
+          
+                
+             
+       
+
+
+
+
+
               </Grid>
-              <Grid item md={4} sm={12} xs={12} lg={4}>
-                <TextField
-                  select
-                  margin="dense"
-                  variant="outlined"
-                  name="year"
-                  label="Year"
-                  style={{ width: "100%" }}
-                  value={education.year}
-                  onChange={handleChange}
-                >
-                  <MenuItem value="F.E">F.E</MenuItem>
-                  <MenuItem value="S.E">S.E</MenuItem>
-                  <MenuItem value="T.E">T.E</MenuItem>
-                  <MenuItem value="B.E">B.E</MenuItem>
-                  <MenuItem value="">Clear Selection</MenuItem> {/* Add this line */}
-                </TextField>
-              </Grid>
-              <Grid item md={4} sm={12} xs={12} lg={4}>
-                <TextField
-                  select
-                  margin="dense"
-                  variant="outlined"
-                  name="field"
-                  label="Field of Study"
-                  style={{ width: "100%" }}
-                  required
-                  value={education.field}
-                  onChange={handleChange}
-                >
-                  <MenuItem value="" disabled>
-                    Select Field
-                  </MenuItem>
-                  {otherFields.map((field) => (
-                    <MenuItem key={field} value={field}>
-                      {field}
-                    </MenuItem>
-                  ))}
-                  <MenuItem value="">Clear Selection</MenuItem> {/* Add this line */}
-                </TextField>
-              </Grid>
-            </Grid>
-            {/* Row 2 */}
-            <Grid container spacing={1} alignItems="center" lg={12} mb={2}>
-              <Grid item md={4} sm={12} xs={12} lg={4}>
-                <TextField
-                  select
-                  margin="dense"
-                  variant="outlined"
-                  name="branch"
-                  label="Select Branch"
-                  style={{ width: "100%" }}
-                  required
-                  value={education.branch}
-                  onChange={handleChange}
-                >
-                  <MenuItem value="" disabled>
-                    Select Branch
-                  </MenuItem>
-                  {engineeringFields.map((field) => (
-                    <MenuItem key={field} value={field}>
-                      {field}
-                    </MenuItem>
-                  ))}
-                  <MenuItem value="">Clear Selection</MenuItem> {/* Add this line */}
-                </TextField>
-              </Grid>
-              <Grid item md={4} sm={12} xs={12} lg={4}>
-                <TextField
-                  select
-                  margin="dense"
-                  variant="outlined"
-                  name="startYear"
-                  label="Start Year"
-                  style={{ width: "100%" }}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton>
-                          <EventIcon />
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                  value={education.startYear}
-                  onChange={handleChange}
-                >
-                  <MenuItem value="" disabled>
-                    Select Year
-                  </MenuItem>
-                  {years.map((year) => (
-                    <MenuItem key={year} value={year}>
-                      {year}
-                    </MenuItem>
-                  ))}
-                  <MenuItem value="">Clear Selection</MenuItem>
-                </TextField>
-              </Grid>
-              <Grid item md={4} sm={12} xs={12} lg={4}>
-                <TextField
-                  select
-                  margin="dense"
-                  variant="outlined"
-                  name="endYear"
-                  label="End Year"
-                  style={{ width: "100%" }}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton>
-                          <EventIcon />
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                  value={education.endYear}
-                  onChange={handleChange}
-                >
-                  <MenuItem value="" disabled>
-                    Select Year
-                  </MenuItem>
-                  {years.map((year) => (
-                    <MenuItem key={year} value={year}>
-                      {year}
-                    </MenuItem>
-                  ))}
-                  <MenuItem value="">Clear Selection</MenuItem>
-                </TextField>
-              </Grid>
-            </Grid>
-            {/* Row 3 */}
-            <Grid container spacing={1} alignItems="center" lg={12} mb={2}>
-              <Grid item md={6} sm={12} xs={12} lg={6}>
-                <TextField
-                  margin="dense"
-                  variant="outlined"
-                  name="city"
-                  label="City"
-                  style={{ width: "100%" }}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton>
-                          <LocationCityIcon />
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                  value={education.city}
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid item md={6} sm={12} xs={12} lg={6}>
-                <TextField
-                  margin="dense"
-                  variant="outlined"
-                  name="grades"
-                  label="CGPA"
-                  style={{ width: "100%" }}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton>
-                          <GradeIcon />
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                  value={education.grades}
-                  onChange={handleChange}
-                />
-              </Grid>
-            </Grid>
-          </Grid>
             </div>
           }
          
@@ -662,8 +731,8 @@ const medicalFields = [
                   margin="dense"
                   variant="outlined"
                   type="text"
-                  name="percentage"
-                  label="Percentage"
+                  name="hscGPA"
+                  label="GPA"
                   style={{ width: "100%" }}
                   InputProps={{
                     endAdornment: (
@@ -674,7 +743,7 @@ const medicalFields = [
                       </InputAdornment>
                     ),
                   }}
-                  value={education.percentage}
+                  value={education.hscGPA}
                   onChange={handleChange}
                 />
               </Grid>
@@ -704,6 +773,8 @@ const medicalFields = [
               </Grid>
             </Grid>
           </Grid>
+
+
           {/* 10th Details */}
           <Grid container spacing={1} alignItems="center" lg={12} mt={2}>
             <div>
@@ -826,10 +897,10 @@ const medicalFields = [
                   margin="dense"
                   variant="outlined"
                   type="text"
-                  name="percentage2"
-                  label="Percentage"
+                  name="sscGPA"
+                  label="GPA"
                   style={{ width: "100%" }}
-                  value={education.percentage2}
+                  value={education.sscGPA}
                   onChange={handleChange}
                   InputProps={{
                     endAdornment: (
@@ -890,9 +961,6 @@ const medicalFields = [
                 <h4>Project Section</h4>
                 <ArrowForwardIcon style={iconStyle} />
               </Link>
-
-           
-            
           }
          
         </Grid>

@@ -6,6 +6,7 @@
    
 }
 
+
 .template3 h5 {
     font-size: 16px;
 }
@@ -143,4 +144,106 @@
    text-align: start;
    margin-left: 30px;
    margin-top: 10px;
+}
+
+
+
+@media (max-width: 768px) {
+  .template3 {
+    padding: 15px;
+    margin: 15px;
+  }
+
+  .template3-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .top-section-left,
+  .top-section-right,
+  .bottom-section-left,
+  .bottom-section-right {
+    width: 100%;
+    padding: 20px;
+    text-align: left !important;
+  }
+
+  .t-name-3 {
+    text-align: left;
+    font-size: 28px;
+    margin-top: 20px;
+  }
+
+  .contact3 {
+    padding: 20px;
+  }
+
+  .skill-section-3 {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .t-3-other,
+  .t-3-language {
+    margin: 10px 0 0 0;
+    padding: 0;
+    list-style-position: inside;
+  }
+
+  .t-3-other li::after,
+  .t-3-language li::after {
+    margin-left: 5px;
+  }
+
+  .clg-section-1,
+  .clg-section-2,
+  .clg-section-3 {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .info-1,
+  .info-2 {
+    width: 100%;
+  }
+
+  .role-date {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-button {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .download-button {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .template3 {
+    padding: 10px;
+  }
+
+  .section-title-3,
+  .skill-title-3 {
+    font-size: 18px;
+  }
+
+  .template3 p {
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .t-name-3 {
+    font-size: 24px;
+  }
+
+  .lineOne3,
+  .lineFull3 {
+    width: 100%;
+  }
 }

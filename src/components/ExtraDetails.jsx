@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
-  Card,
+
   CardContent,
   CardHeader,
   Grid,
@@ -12,7 +12,6 @@ import {
   Box
 } from "@mui/material";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
-import InterestsIcon from "@mui/icons-material/Interests";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch, useSelector } from "react-redux";
@@ -107,29 +106,7 @@ const ExtraDetails = () => {
     borderRadius: "20px"
   };
 
-  const coresubject = (
-    <div>
-      <p>Core Subjects</p>
-      <ul>
-        <li>
-          Data Structures and Algorithms
-        </li>
-        <li>
-          Operating Systems
-        </li>
-        <li>
-          Database Management Systems
-        </li>
-        <li>
-          Computer Networks  etc.
-        </li>
-        <li>
-          Object Oriented Programming  etc.
-        </li>
-      </ul>
-    </div>
-  )
-
+  
   const handleSave = async () => {
     setLoading(true);
     const resumeData = {
@@ -139,7 +116,7 @@ const ExtraDetails = () => {
       experience: experienceData,
       extraDetails: extraDetailsData,
     };
-    // console.log("resume data: ", resumeData);
+  
     try {
       const response = await axios.post(`${BASE_URL}/data/resume-data?id=${currentUser._id}`, { resumeData }, {
         headers: {
@@ -200,7 +177,7 @@ const ExtraDetails = () => {
                   placement="top"
                   arrow
                 >
-                  <p style={{ fontSize: '1rem' }}> <i class="fa-solid fa-circle-info"></i></p>
+                  <p style={{ fontSize: '1rem' }}> <i className="fa-solid fa-circle-info"></i></p>
                 </Tooltip>
               </p>
             </Typography>
@@ -248,7 +225,7 @@ const ExtraDetails = () => {
                   placement="top"
                   arrow
                 >
-                  <p style={{ fontSize: '1rem' }}> <i class="fa-solid fa-circle-info"></i></p>
+                  <p style={{ fontSize: '1rem' }}> <i className="fa-solid fa-circle-info"></i></p>
                 </Tooltip>
               </p>
             </Typography>
@@ -294,7 +271,7 @@ const ExtraDetails = () => {
                   placement="top"
                   arrow
                 >
-                  <p style={{ fontSize: '1rem' }}> <i class="fa-solid fa-circle-info"></i></p>
+                  <p style={{ fontSize: '1rem' }}> <i className="fa-solid fa-circle-info"></i></p>
                 </Tooltip>
               </p>
             </Typography>
@@ -341,7 +318,7 @@ const ExtraDetails = () => {
                   placement="top"
                   arrow
                 >
-                  <p style={{ fontSize: '1rem' }}> <i class="fa-solid fa-circle-info"></i></p>
+                  <p style={{ fontSize: '1rem' }}> <i className="fa-solid fa-circle-info"></i></p>
                 </Tooltip>
               </p>
             </Typography>
@@ -390,7 +367,7 @@ const ExtraDetails = () => {
                   placement="top"
                   arrow
                 >
-                  <p style={{ fontSize: '1rem' }}> <i class="fa-solid fa-circle-info"></i></p>
+                  <p style={{ fontSize: '1rem' }}> <i className="fa-solid fa-circle-info"></i></p>
                 </Tooltip>
               </p>
             </Typography>
@@ -522,50 +499,7 @@ const ExtraDetails = () => {
           </Button>
         </div>
 
-        {/* Core Subjects */}
-        {/* <div>
-          <Typography variant="h5" sx={{ marginTop: "8px" }}>
-            Core Subjects
-          </Typography>
-          <Grid container spacing={2} alignItems="center" lg={12} >
-            {extraDetails?.coreSubjects?.map((coresubject, index) => (
-              <Grid item md={4} sm={6} xs={12} key={index} style={{ display: 'flex', gap: '4px' }}>
-                <TextField
-                  margin="dense"
-                  variant="outlined"
-                  type="text"
-                  name={`coresubject${index + 1}`}
-                  label={`Core Subject ${index + 1}`}
-                  style={{ width: "100%" }}
-                  value={coresubject}
-                  onChange={(e) =>
-                    handleInputChange(index, "coreSubjects", e.target.value)
-                  }
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton>
-                          <EmojiEventsIcon />
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-                <IconButton onClick={() => handleDeleteItem(index, "coreSubjects")}>
-                  <DeleteIcon color="error" />
-                </IconButton>
-              </Grid>
-            ))}
-          </Grid>
-          <Button
-            variant="contained" sx={{
-                marginTop: "15px", backgroundColor: "var(--btn)", color: 'black', '&:hover': { backgroundColor: "var(--btnHover)" },
-              }}
-            onClick={() => handleAddItem("coreSubjects")}
-          >
-            Add Core Subject
-          </Button>
-        </div> */}
+      
       </CardContent>
 
       <p style={{ display: 'flex', justifyContent: 'center', color: 'red' }}>*Please save your data to get edited next time</p>

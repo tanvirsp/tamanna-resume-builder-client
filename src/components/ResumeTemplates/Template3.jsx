@@ -1,25 +1,21 @@
-import { Box, Button, Paper, Typography, CircularProgress } from "@mui/material";
+import { Button,  CircularProgress } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { saveAs } from "file-saver";
+
 import Confetti from "react-confetti";
-import github from "../../assets/github.png";
-import leetcode from "../../assets/leetcode.png";
-import codechef from "../../assets/codechef.png";
-import codeforces from "../../assets/codeforces.png";
+
 import DownloadIcon from "@mui/icons-material/Download";
 import "../../styles/resumetemplate1.css";
-import { Link, useNavigate } from "react-router-dom";
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useNavigate } from "react-router-dom";
 import moment from "moment";
-import html2canvas from 'html2canvas';
-import { jsPDF } from 'jspdf';
-// import { saveAs } from "file-saver";
+
 import html2pdf from "html2pdf.js";
-import Feedback from "../Feedback";
 import '../../styles/template3.css'
-import cvPic from '../../assets/cv-pic.jpg'
+
+import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+
 
 
 export default function Template3() {
@@ -44,39 +40,53 @@ export default function Template3() {
   }, []);
 
 
-  const handleDownload = () => {
-    try {
-      const resumeContainer = document.querySelector(".print-area");
-      if (resumeContainer) {
-        setLoading(true);
-        const opt = {
-          margin: 0.1,
-          filename: 'user-resume.pdf',
-          image: { type: 'jpeg', quality: 1.00 },
-          html2canvas: { scale: 4 },
-          jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
-          // pagebreak: { mode: ['avoid-all', 'css', 'legacy'] } // Ensure proper page breaks
-        };
 
-        html2pdf().set(opt).from(resumeContainer).save().then(() => {
-          setLoading(false); // End loading state after PDF is generated
-          setCongratsVisible(true); // Trigger Confetti effect
+const handleDownload = async () => {
+  try {
+    const resumeContainer = document.querySelector(".print-area");
+    const img = resumeContainer.querySelector(".imgBB");
 
-          // Reset confetti after 5 seconds
-          setTimeout(() => {
-            setCongratsVisible(false);
-          }, 5000);
-        });
-      } else {
-        console.error("Print Area not found.");
+    if (resumeContainer && img && img.src) {
+      setLoading(true);
+
+      // Convert image to Base64 and update src
+      const base64Image = await getBase64ImageFromURL(img.src);
+      img.setAttribute("src", base64Image);
+
+      const opt = {
+        margin: 0.1,
+        filename: 'user-resume.pdf',
+        image: { type: 'jpeg', quality: 1.00 },
+        html2canvas: { scale: 4 },
+        jsPDF: { unit: 'in', format: 'A4', orientation: 'portrait' },
+      };
+
+      html2pdf().set(opt).from(resumeContainer).save().then(() => {
         setLoading(false);
-      }
-    } catch (error) {
-      console.error("Error generating PDF:", error);
+        setCongratsVisible(true);
+        setTimeout(() => setCongratsVisible(false), 5000);
+      });
+    } else {
+      console.error("Print Area or image not found.");
       setLoading(false);
     }
-  };
+  } catch (error) {
+    console.error("Error generating PDF:", error);
+    setLoading(false);
+  }
+};
 
+
+  const getBase64ImageFromURL = async (url) => {
+  const res = await fetch(url, { mode: 'cors' });
+  const blob = await res.blob();
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = reject;
+    reader.onload = () => resolve(reader.result);
+    reader.readAsDataURL(blob);
+  });
+};
 
 
 
@@ -92,15 +102,18 @@ export default function Template3() {
         <div className="print-area ">
             <div className="template3-container">
                 <div className="top-section-left">
-                    <img className="profile3" src={cvPic} alt="Profile picture" />
+                    <img className="profile3 imgBB" src={profile?.picture} alt="Profile picture" />
 
                     <div className="contact3">
                         <h4 className="section-title-3">Contact</h4>
                         <div className="lineOne3"></div>
-                        <p style={{marginTop: "20px"}}>+123456789</p>
-                        <p>yourEmail@email.com</p>
-                        <p>address here</p>
+                            <p style={{marginTop: "10px" }}> <PhoneAndroidIcon fontSize="10px" /> {profile?.mobile}</p>
+                            <p> <MailOutlineIcon fontSize='10px' /> {profile?.email}</p>
+                            <p>  <LocationOnIcon fontSize='10px' /> {profile?.address}</p>
                         <br />
+
+
+                        
 
                         <div className="lineTwo3"></div>
                     </div>
